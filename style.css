@@ -1,18 +1,21 @@
 * {
   background-color: lightgrey;
-  margin: 0px;
-  padding: 0px;
   box-sizing: border-box;
 }
 
 .container {
   width: 960px;
-  height: 960px;  
+  height: 960px;
+  margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(16, 1fr);
 }
 
 .grid-cell {
   background-color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+#gridsize:invalid {
+  background-color: pink;
 }

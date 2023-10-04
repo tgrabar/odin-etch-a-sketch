@@ -1,17 +1,35 @@
-const gridWidth = 16;
 const container = document.querySelector('.container');
+const gridSizeInput = document.querySelector('#gridsize');
 
-// create grid with height = width
-for (let i = 1; i <= Math.pow(gridWidth, 2); i++) {
-  const gridCell = document.createElement('div');
-  gridCell.classList.add('grid-cell');
-  container.appendChild(gridCell);
+const resetBtn = document.querySelector('.reset-btn');
+resetBtn.addEventListener("click", () => resetGrid(validateGridSize()));
+
+// create 16x16 default grid
+createGrid(16);
+
+function createGrid (gridSize) {
+  for (let i = 1; i <= Math.pow(gridSize, 2); i++) {
+    const gridCell = document.createElement('div');
+    gridCell.classList.add('grid-cell');
+    container.appendChild(gridCell);
+  }
+  container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+  container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 }
 
-document.querySelectorAll('.grid-cell').forEach(cell => {
-  cell.addEventListener('mouseenter', () => changeColor(cell))
+container.addEventListener('pointerover', e => {
+  if (e.target.matches('.grid-cell')) {
+    e.target.style.backgroundColor = 'black';
+  }
 })
 
-function changeColor(cell) {
-  cell.style.backgroundColor = 'black';
+function resetGrid(gridSize) {
+  container.replaceChildren();
+  createGrid(gridSize);
+}
+
+// default 16x16 if invalid input
+function validateGridSize () {
+  if (gridSizeInput.validity.valid && !gridSizeInput.validity.valueMissing) return gridSizeInput.value;
+  else return 16;
 }
