@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+input, button {
+  margin-right: 1rem;
+}
+
 .container {
   width: 960px;
   height: 960px;

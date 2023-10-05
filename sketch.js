@@ -1,5 +1,6 @@
 const container = document.querySelector('.container');
 const gridSizeInput = document.querySelector('#gridsize');
+const colorInput = document.querySelector('#color-choice')
 
 const resetBtn = document.querySelector('.reset-btn');
 resetBtn.addEventListener("click", () => resetGrid(validateGridSize()));
@@ -18,8 +19,8 @@ function createGrid (gridSize) {
 }
 
 container.addEventListener('pointerover', e => {
-  if (e.target.matches('.grid-cell')) {
-    e.target.style.backgroundColor = 'black';
+  if (e.target.matches('.grid-cell') && e.buttons > 0) {
+    e.target.style.backgroundColor = colorInput.value;
   }
 })
 
