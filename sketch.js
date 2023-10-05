@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 const gridSizeInput = document.querySelector('#gridsize');
-const colorInput = document.querySelector('#color-choice')
+const colorInput = document.querySelector('#color-choice');
+const randomizeColor = document.querySelector('#color-random');
 
 const resetBtn = document.querySelector('.reset-btn');
 resetBtn.addEventListener("click", () => resetGrid(validateGridSize()));
@@ -20,7 +21,7 @@ function createGrid (gridSize) {
 
 container.addEventListener('pointerover', e => {
   if (e.target.matches('.grid-cell') && e.buttons > 0) {
-    e.target.style.backgroundColor = colorInput.value;
+    e.target.style.backgroundColor = getColor();
   }
 })
 
@@ -33,4 +34,10 @@ function resetGrid(gridSize) {
 function validateGridSize () {
   if (gridSizeInput.validity.valid && !gridSizeInput.validity.valueMissing) return gridSizeInput.value;
   else return 16;
+}
+
+function getColor () {
+  if (randomizeColor.checked)
+    return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+  else return colorInput.value;
 }
